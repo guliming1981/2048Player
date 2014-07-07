@@ -2,8 +2,9 @@
 %	direction: 1 left; 2 right; 3 up; 4 down;
 %	return the new board after movement
 
-function new_board = MoveBoard(board, direction)
+function [new_board, success] = MoveBoard(board, direction)
 	new_board = board;
+	success   = 0;
 	
 	if ~CanMove(board, direction)
 		return;
@@ -30,6 +31,8 @@ function new_board = MoveBoard(board, direction)
 			new_board(:,i) = (Move(board(:,i), 4, -1))';
 		end
 	end;
+	
+	success = 1;
 end
 
 function new_line = Move(aLine, start, dif)
