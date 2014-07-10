@@ -4,21 +4,18 @@
 function new_board = RandPutNum(board, num)
 	new_board = board;
 	
-	if ~any(board<=0)
-		%printf('Matrix is full\n');
+	empty = find(board==0);
+	len = length(empty);
+	
+	if len == 0
+		error('Matrix is full\n');
 		return;
 	end
 	
-	h = size(board, 1);
-	w = size(board, 2);
+	r = ceil(len*rand(1));
 	
-	i = ceil(h*rand(1));
-	j = ceil(w*rand(1));
+	i = ceil(empty(r)/4);
+	j = empty(r) - i * 4 + 4;
 	
-	while board(i, j) != 0
-		i = ceil(h*rand(1));
-		j = ceil(w*rand(1));
-	end
-	
-	new_board(i, j) = num;
+	new_board(j, i) = num;
 end
